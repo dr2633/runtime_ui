@@ -1,5 +1,4 @@
-// components/calendar/SimulationCalendar.tsx
-
+// components/Calendar/SimulationCalendar.tsx
 import React, { useState } from 'react';
 import { CalendarView } from './CalendarView';
 import { Legend } from './Legend';
@@ -7,17 +6,17 @@ import { ThemeSwitcher } from './ThemeSwitcher';
 import { ViewToggle } from './ViewToggle';
 import { useSimulatedEvents } from '../../hooks/useSimulatedEvents';
 import { calendarThemes } from '../../styles/calendarThemes';
+import { CalendarTheme, CalendarThemeName } from '../../types/theme';
 import { ChatInterface } from '../Chat/ChatInterface';
 import { SimulatedEvent } from './CalendarEventBlock';
 
-
 export const SimulationCalendar: React.FC = () => {
   const [viewMode, setViewMode] = useState<'daily' | 'weekly' | 'monthly'>('weekly');
-  const [themeName, setThemeName] = useState<'charcoal' | 'mint' | 'ocean'>('charcoal');
+  const [themeName, setThemeName] = useState<CalendarThemeName>('charcoal');
   const [selectedEvent, setSelectedEvent] = useState<SimulatedEvent | null>(null);
 
-  const theme: CalendarTheme = calendarThemes[themeName];
-  const events = useSimulatedEvents(); // Replace with real hook/api integration
+  const theme: CalendarTheme = calendarThemes[themeName] ?? calendarThemes.charcoal;
+  const events = useSimulatedEvents(); // Returns an array of SimulatedEvent
 
   return (
     <div
@@ -44,7 +43,13 @@ export const SimulationCalendar: React.FC = () => {
         <aside className="md:col-span-1 space-y-4">
           <Legend theme={theme} />
           {selectedEvent && (
-            <ChatBox context={selectedEvent} />
+            <ChatInterface
+              context={selectedEvent}
+              onSubmitFeedback={(feedback) => {
+                console.log('Feedback submitted:', feedback);
+                setSelectedEvent(null); // optionally reset selection
+              }}
+            />
           )}
         </aside>
       </main>
