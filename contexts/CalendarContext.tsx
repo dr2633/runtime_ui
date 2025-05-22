@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useTheme } from './ThemeContext';
-
-type ViewMode = 'day' | 'week' | 'month';
+import { defaultPreferences, ViewMode } from '../constants/defaultPreferences';
 
 interface CalendarContextType {
   selectedDate: Date;
@@ -15,17 +14,16 @@ const CalendarContext = createContext<CalendarContextType | undefined>(undefined
 
 export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [viewMode, setViewMode] = useState<ViewMode>('week');
+  const [viewMode, setViewMode] = useState<ViewMode>(defaultPreferences.defaultView);
 
-  const { theme } = useTheme(); // Optional: use to sync visuals/layouts with theme
+  const { themeName } = useTheme(); // Access theme for optional behavior
 
-  // Optional: log viewMode or adapt layout based on theme
+  // Optional: adapt default view mode for specific themes
   useEffect(() => {
-    // Example: change default view mode based on theme
-    if (theme === 'charcoal' && viewMode !== 'month') {
+    if (themeName === 'charcoal' && viewMode !== 'month') {
       setViewMode('month');
     }
-  }, [theme]);
+  }, [themeName]);
 
   const resetToToday = () => {
     setSelectedDate(new Date());

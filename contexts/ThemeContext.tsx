@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { calendarThemes, CalendarTheme, CalendarThemeName } from '../styles/calendarThemes';
+import { defaultPreferences } from '../constants/defaultPreferences';
 
 interface ThemeContextType {
   themeName: CalendarThemeName;
@@ -12,20 +13,17 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const THEME_STORAGE_KEY = 'runtime-theme';
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [themeName, setThemeState] = useState<CalendarThemeName>('charcoal');
-
-  // Load theme from localStorage
-  useEffect(() => {
+  const getInitialTheme = (): CalendarThemeName => {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
-    if (stored && isValidThemeName(stored)) {
-      setThemeState(stored as CalendarThemeName);
-    }
-  }, []);
+    if (stored && isValidThemeName(stored)) return stored as CalendarThemeName;
+    return defaultPreferences.theme;
+  };
 
-  // Sync theme to localStorage and document attribute
+  const [themeName, setThemeState] = useState<CalendarThemeName>(getInitialTheme);
+
   useEffect(() => {
     localStorage.setItem(THEME_STORAGE_KEY, themeName);
-    document.documentElement.setAttribute('data-theme', themeName); // for CSS or testing
+    document.documentElement.setAttribute('data-theme', themeName);
   }, [themeName]);
 
   const setThemeName = (newTheme: CalendarThemeName) => {
