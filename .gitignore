@@ -1,4 +1,32 @@
-scratch/
+# Runtime
 node_modules/
-*.log
+dist/
+scratch/
 .env
+.env.local
+*.log
+
+# System
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Vite
+.vite/
+
+# Vercel / Netlify
+.vercel/
+.netlify/
+
+# Lockfiles (if switching between npm and yarn)
+yarn.lock
+pnpm-lock.yaml
+
+# Mac + Unix backup files
+*.bak
+*~
