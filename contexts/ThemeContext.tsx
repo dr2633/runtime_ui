@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-
-type Theme = 'dark' | 'light' | 'charcoal' | 'mint' | 'ocean'; // extend as needed
+import { calendarThemes, CalendarTheme, CalendarThemeName } from '../styles/calendarThemes';
 
 interface ThemeContextType {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
+  themeName: CalendarThemeName;
+  setThemeName: (theme: CalendarThemeName) => void;
+  theme: CalendarTheme;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -12,29 +12,32 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const THEME_STORAGE_KEY = 'runtime-theme';
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setThemeState] = useState<Theme>('charcoal');
+  const [themeName, setThemeState] = useState<CalendarThemeName>('charcoal');
 
-  // Persist theme to localStorage
+  // Load theme from localStorage
   useEffect(() => {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
-    if (stored && isValidTheme(stored)) {
-      setThemeState(stored as Theme);
+    if (stored && isValidThemeName(stored)) {
+      setThemeState(stored as CalendarThemeName);
     }
   }, []);
 
+  // Sync theme to localStorage and document attribute
   useEffect(() => {
-    localStorage.setItem(THEME_STORAGE_KEY, theme);
-    document.documentElement.setAttribute('data-theme', theme); // optional: for CSS hooks
-  }, [theme]);
+    localStorage.setItem(THEME_STORAGE_KEY, themeName);
+    document.documentElement.setAttribute('data-theme', themeName); // for CSS or testing
+  }, [themeName]);
 
-  const setTheme = (newTheme: Theme) => {
-    if (isValidTheme(newTheme)) {
+  const setThemeName = (newTheme: CalendarThemeName) => {
+    if (isValidThemeName(newTheme)) {
       setThemeState(newTheme);
     }
   };
 
+  const theme = calendarThemes[themeName];
+
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ themeName, setThemeName, theme }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -48,6 +51,6 @@ export const useTheme = (): ThemeContextType => {
   return context;
 };
 
-const isValidTheme = (value: string): value is Theme => {
-  return ['dark', 'light', 'charcoal', 'mint', 'ocean'].includes(value);
+const isValidThemeName = (value: string): value is CalendarThemeName => {
+  return Object.keys(calendarThemes).includes(value);
 };
