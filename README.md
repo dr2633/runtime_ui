@@ -1,8 +1,7 @@
-## Interface Design and Experiments for Runtime Labs
+## Runtime UI 
 
 Runtime UI is the user interface for interacting with the temporal simulation and memory-grounded planning layer of Runtime Labs. This interface supports counterfactual scheduling, editable memory traces, and feedback-driven agent behavior—designed in a co-creative, visually intuitive format.
 
-OpenAI-inspired design with charcoal base + neon green accents  
 Built with React, Tailwind, and FastAPI backend integration
 
 ---
@@ -19,14 +18,7 @@ Built with React, Tailwind, and FastAPI backend integration
 ## Project Structure
 
 ```
-/web  
-  /components  
-    /calendar               # Calendar interface + utilities  
-    /chatbox                # Feedback panel  
-    /styles                 # Theme + event type styling  
-  /hooks                    # Custom logic for state and data fetching  
-  /pages                    # Entrypoints (e.g., planner.tsx)  
-  /types                    # TypeScript interfaces and enums  
+
 ```
 
 ---

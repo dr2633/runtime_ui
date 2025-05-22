@@ -1,6 +1,6 @@
 // pages/planner.tsx
 import React from 'react';
-import { SimulationCalendar } from '@/components/calendar/SimulationCalendar';
+import { SimulationCalendar } from '@/components/Calendar/SimulationCalendar';
 
 const PlannerPage: React.FC = () => {
   return (
