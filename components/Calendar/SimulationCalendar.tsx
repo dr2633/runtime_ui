@@ -1,13 +1,15 @@
 // components/calendar/SimulationCalendar.tsx
+
 import React, { useState } from 'react';
 import { CalendarView } from './CalendarView';
 import { Legend } from './Legend';
 import { ThemeSwitcher } from './ThemeSwitcher';
 import { ViewToggle } from './ViewToggle';
-import { useSimulatedEvents } from '@/hooks/useSimulatedEvents';
-import { CalendarTheme, calendarThemes } from './calendarThemes';
-import { ChatBox } from '@/components/chatbox/ChatBox';
+import { useSimulatedEvents } from '../../hooks/useSimulatedEvents';
+import { calendarThemes } from '../../styles/calendarThemes';
+import { ChatInterface } from '../Chat/ChatInterface';
 import { SimulatedEvent } from './CalendarEventBlock';
+
 
 export const SimulationCalendar: React.FC = () => {
   const [viewMode, setViewMode] = useState<'daily' | 'weekly' | 'monthly'>('weekly');
