@@ -1,6 +1,6 @@
 ## Runtime UI 
 
-Runtime UI is the user interface for interacting with the temporal simulation and memory-grounded planning layer of Runtime Labs. This interface supports counterfactual scheduling, editable memory traces, and feedback-driven agent behavior—designed in a co-creative, visually intuitive format.
+Runtime UI is the user interface for interacting with the temporal simulation and memory-grounded planning layer of Runtime Labs.
 
 Built with React, Tailwind, and FastAPI backend integration
 
@@ -12,14 +12,6 @@ Built with React, Tailwind, and FastAPI backend integration
 - Feedback Loop: Users provide structured feedback (edit, accept, reject)
 - Editable Memory: Calendar acts as both execution surface and traceable log
 - Multimodal UI: Visual calendar + text interface for refining plans
-
----
-
-## Project Structure
-
-```
-
-```
 
 ---
 
@@ -73,23 +65,6 @@ Ensure FastAPI backend (/api) is running on /api with Windsurf or proxy setup.
 
 ---
 
-## Theming & Design
-
-- Charcoal Base: #0D0D0D  
-- Neon Green: #00FF88  
-
-Toggleable between:
-
-- Dark (default)
-- Neon
-- Light
-
-Themes controlled via:
-useCalendarState.ts → theme state  
-calendarThemes.ts → Tailwind classes
-
----
-
 ## Simulated API Contract
 
 **Request:**
@@ -137,10 +112,9 @@ https://docs.runtimelabs.ai/contributing
 
 ---
 
-## Questions or Feedback?
+## Feedback
 
 Contact: derek@runtimelabs.ai  
-Join the early user feedback group by submitting the form at runtimelabs.ai
 
 ---
 
