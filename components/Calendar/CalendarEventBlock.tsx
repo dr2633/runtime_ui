@@ -1,7 +1,7 @@
 // components/calendar/CalendarEventBlock.tsx
 import React from 'react';
-import { getEventStyle, EventType } from '@/components/styles/eventStyles';
-import { CalendarTheme } from '@/components/calendar/calendarThemes';
+import { getEventStyle, EventType } from '../../styles/eventStyles';
+import { calendarThemes } from '../../styles/calendarThemes';
 
 export interface SimulatedEvent {
   uid: string;
@@ -14,7 +14,7 @@ export interface SimulatedEvent {
 
 interface CalendarEventBlockProps {
   event: SimulatedEvent;
-  theme: CalendarTheme;
+  theme: calendarThemes;
   onSelect?: (event: SimulatedEvent) => void;
 }
 

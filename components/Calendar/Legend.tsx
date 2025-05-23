@@ -1,7 +1,7 @@
 // components/calendar/Legend.tsx
 import React from 'react';
 import { getEventStyle, EventType } from '@/components/styles/eventStyles';
-import { CalendarTheme } from './calendarThemes';
+import { calendarThemes } from '../../styles/calendarThemes';
 
 interface LegendProps {
   theme: CalendarTheme;
